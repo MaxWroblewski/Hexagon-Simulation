@@ -16,14 +16,14 @@ def rho(x, y):
     return rho_0 * (1 + 0.05 * max(0,x) + 0.005 * max(0,y))
 
 prism = Hexagonal_Prism(a, rho, l, rho_0, n_theta, n_r, n_z) #Initialize moment of inertia calculation
-matrix = prism.form_matrix() #Output moment of inertia matrix
+matrix, _, __, ___ = prism.form_matrix() #Output moment of inertia matrix
 
 print(matrix) #Print moment of inertia matrix
 
 
-T, f = prism.run_eval(10)
-print(T)
-print(f)
+#T, f = prism.run_eval(10)
+#print(T)
+#print(f)
 
 w = np.array([0.001, 10, 0.001])
 dt = 0.0005
@@ -31,9 +31,12 @@ steps = 500000
 
 
 
+run = Run_Rotation(I = matrix, w = w, dt = dt, steps = steps, path = 'test')
+df = run.run(save = True)
+print(run.find_w_dot())
+run.plot_poinsot()
 
-#run = Run_Rotation(I = matrix, w = w, dt = dt, steps = steps, path = 'test')
-#df = run.run(save = True)
+
 #print(df)
 #run.plot_L(save = True, total = True)
 
