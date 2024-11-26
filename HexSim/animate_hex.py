@@ -121,3 +121,5 @@ class Animate_Hex:
         if save == True and self.out != None: 
             ani.save(self.out+'\\'+name, writer='Pillow', fps=30)
     plt.show()
+
+#Change
