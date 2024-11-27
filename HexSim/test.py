@@ -25,16 +25,19 @@ print(matrix) #Print moment of inertia matrix
 #print(T)
 #print(f)
 
-w = np.array([0.001, 10, 0.001])
+w = np.array([0.1, 10, 1])
 dt = 0.0005
 steps = 500000
 
-
+matrix = ([1, 0, 0],
+          [0, 2, 0],
+          [0, 0, 3])
 
 run = Run_Rotation(I = matrix, w = w, dt = dt, steps = steps, path = 'test')
 df = run.run(save = True)
-print(run.find_w_dot())
-run.plot_poinsot()
+run.plot_L(total = True, save = True)
+run.plot_energy(save = True)
+run.plot_poinsot(save = True)
 
 
 #print(df)

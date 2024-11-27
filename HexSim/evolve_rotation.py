@@ -35,17 +35,33 @@ class Run_Rotation:
         wx_dot = (self.I2-self.I3)*self.w[1]*self.w[2]/self.I1
         wy_dot = (self.I3-self.I1)*self.w[2]*self.w[0]/self.I2
         wz_dot = (self.I1-self.I2)*self.w[0]*self.w[1]/self.I3
-        w_dot = np.array([wx_dot, wy_dot, wz_dot])
-        return w_dot
+        self.w_dot = np.array([wx_dot, wy_dot, wz_dot])
+        return self.w_dot
 
     #Update w given new w_dot
+    #def update_omega(self):
+    #    self.w = self.w + self.dt*self.w_dot
+    #    #for i in range(len(self.w)):
+    #    #    self.w[i] = self.w[i] + self.w_dot[i]*dt
+    #    #w[0] = w[0] + w_dot[0]*dt
+    #    #w[1] = w[1] + w_dot[1]*dt
+    #    #w[2] = w[2] + w_dot[2]*dt
+    #    return self.w
+
     def update_omega(self):
-        self.w = self.w + self.dt*self.w_dot
-        #for i in range(len(self.w)):
-        #    self.w[i] = self.w[i] + self.w_dot[i]*dt
-        #w[0] = w[0] + w_dot[0]*dt
-        #w[1] = w[1] + w_dot[1]*dt
-        #w[2] = w[2] + w_dot[2]*dt
+        w0 = self.w
+        # Runge-Kutta 4th Order Integration
+        k1 = self.dt * self.find_w_dot()
+        self.w = self.w + 0.5 * k1
+        k2 = self.dt * self.find_w_dot()
+        self.w = self.w + 0.5 * k2
+        k3 = self.dt * self.find_w_dot()
+        self.w = self.w + k3
+        k4 = self.dt * self.find_w_dot()
+
+        # Update angular velocity
+        self.w = w0 + (1/6) * (k1 + 2 * k2 + 2 * k3 + k4)
+
         return self.w
 
     #Def magnitude for use in calculation
@@ -171,7 +187,7 @@ class Run_Rotation:
         from mpl_toolkits.mplot3d import Axes3D
 
         # Calculate the initial kinetic energy E
-        E = self.df['T']
+        E = self.df['T'][0]
         # Generate the inertia ellipsoid surface
         u = np.linspace(0, 2 * np.pi, 100)
         v = np.linspace(0, np.pi, 100)
