@@ -19,7 +19,15 @@ class Run_Rotation:
         self.path = path
         
         if self.path != None:
-            self.out = 'simulation_outputs\\' + self.path + '_Ix' + str(np.round(self.I1,4))+'_Iy'+str(np.round(self.I2,4))+'_Iz'+str(np.round(self.I3,4))+'_wx0'+str(np.round(self.w[0],4))+'_wy0'+str(np.round(self.w[1],4))+'_wz0'+str(np.round(self.w[2],4))+'_dt'+str(self.dt)
+            self.out = ('simulation_outputs\\' + self.path + 
+                        '_Ix' + str("{:.3e}".format(self.I1)) + 
+                        '_Iy' + str("{:.3e}".format(self.I1)) + 
+                        '_Iz' + str("{:.3e}".format(self.I1)) + 
+                        '_wx' + str("{:.2e}".format(self.w[0])) + 
+                        '_wy' + str("{:.2e}".format(self.w[1])) + 
+                        '_wz' + str("{:.2e}".format(self.w[2])) + 
+                        '_dt' + str("{:.3e}".format(self.dt)))
+            
             if not os.path.exists(self.out):
                 os.makedirs(self.out)
         else:
@@ -149,8 +157,10 @@ class Run_Rotation:
         plt.scatter(self.df['Time'], self.df['Lz'], s = 0.5, label = '$L_z$')
         plt.legend()
 
+        length_string = str("{:.2e}".format(self.steps))+'.png'
+
         if save == True and self.out != None:
-            plt.savefig(self.out+'\\len_'+str(self.steps)+'.png')
+            plt.savefig(self.out + '\\len_' + length_string + '.png')
             plt.show()
         else:
             plt.show()
@@ -160,7 +170,7 @@ class Run_Rotation:
             plt.title('Total Angular Momentum over '+str(round(self.df['Time'][self.df.index[-1]]))+' Seconds for $\omega_{0y}=$'+str(self.df['wy'][0]))
             plt.scatter(self.df['Time'], self.df['L_mag'], s = 0.5)
             if save == True and self.out != None:
-                plt.savefig(self.out+'\\len_'+str(self.steps)+'totalL.png')
+                plt.savefig(self.out + '\\len_' + length_string + 'totalL.png')
                 plt.show()
             else:
                 plt.show()
