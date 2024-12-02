@@ -19,7 +19,7 @@ class Run_Rotation:
         self.path = path
         
         if self.path != None:
-            self.out = self.path+'_Ix_'+str(np.round(self.I1,4))+'Iy_'+str(np.round(self.I2,4))+'Iz_'+str(np.round(self.I3,4))+'wx0_'+str(np.round(self.w[0],4))+'wy0_'+str(np.round(self.w[1],4))+'wz0_'+str(np.round(self.w[2],4))+'dt_'+str(self.dt)
+            self.out = 'simulation_outputs\\' + self.path + '_Ix' + str(np.round(self.I1,4))+'_Iy'+str(np.round(self.I2,4))+'_Iz'+str(np.round(self.I3,4))+'_wx0'+str(np.round(self.w[0],4))+'_wy0'+str(np.round(self.w[1],4))+'_wz0'+str(np.round(self.w[2],4))+'_dt'+str(self.dt)
             if not os.path.exists(self.out):
                 os.makedirs(self.out)
         else:
