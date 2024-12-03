@@ -10,10 +10,10 @@ class Animate_Hex:
 
         self.timestep = timestep  # Time step for each frame
         self.frames = frames  # Number of frames in the animation
-        self.a = a
-        self.h = h
-        self.I = I
-        self.df = df
+        self.a = a  # Side length
+        self.h = h  # Thickness
+        self.I = I  # Inertia Tensor
+        self.df = df   # Complete Dataframe
         
         # Add basis vectors (principal axes)
         _, self.principal_axes = np.linalg.eig(self.I)
@@ -31,13 +31,21 @@ class Animate_Hex:
 
         self.path = path
 
+
         if self.path != None:
-            self.out = self.path+'_Ix_'+str(round(self.I[0][0],4))+'Iy_'+str(round(self.I[1][1],4))+'Iz_'+str(round(self.I[2][2],4))+'wx0_'+str(round(self.df['wx'][0],4))+'wy0_'+str(round(self.df['wy'][0],4))+'wz0_'+str(round(self.df['wz'][0],4))+'dt_'+str(self.df['Time'][1])
+            self.out = ('simulation_outputs\\' + self.path + 
+                        '_Ix' + str("{:.3e}".format(self.I1)) + 
+                        '_Iy' + str("{:.3e}".format(self.I1)) + 
+                        '_Iz' + str("{:.3e}".format(self.I1)) + 
+                        '_wx' + str("{:.2e}".format(self.w[0])) + 
+                        '_wy' + str("{:.2e}".format(self.w[1])) + 
+                        '_wz' + str("{:.2e}".format(self.w[2])) + 
+                        '_dt' + str("{:.3e}".format(self.dt)))
+            
             if not os.path.exists(self.out):
                 os.makedirs(self.out)
         else:
             self.out = None
-
 
 
     # Hexagonal prism vertices and faces definition

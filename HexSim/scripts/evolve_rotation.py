@@ -236,6 +236,12 @@ class Run_Rotation:
         ax.set_title(title)
         ax.legend()
 
+        # Set limits for better visualization
+        max_lim = max(omega1[0], omega2[0], omega3[0]) * 1.2
+        ax.set_xlim([-max_lim, max_lim])
+        ax.set_ylim([-max_lim, max_lim])
+        ax.set_zlim([-max_lim, max_lim])
+
         if save == True and self.out != None:
             plt.savefig(os.path.join(self.out, 'poinsot_plot.png'))
             plt.show()
