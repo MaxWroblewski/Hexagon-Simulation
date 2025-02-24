@@ -7,8 +7,7 @@ We study the rotational dynamics of hexagonal prisms and configurations of multi
 
 2*
 
-```latex
-% !TEX TS-program = pdflatex
+```tex
 \documentclass{article}
 \usepackage{amsmath}
 \usepackage{amssymb}
