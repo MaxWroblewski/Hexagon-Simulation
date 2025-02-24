@@ -33,7 +33,10 @@ class Hexagonal_Prism:
         sector_angle = np.pi / 3
         theta_mod = theta % sector_angle
         return a / np.cos(theta_mod - sector_angle / 2)
-        
+
+
+
+
     def form_matrix(self):
 
         self.points = []
