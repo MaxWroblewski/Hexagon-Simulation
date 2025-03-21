@@ -30,7 +30,7 @@ In the context of the tennis racket effect, Euler’s equations for rotation are
 
 A small miscalculation in $\lambda_2$ can therefore lead to a large error
 in predicting the stability of rotation about the intermediate axis.
-This demonstrates the high sensitivity of irrationally symmetric objects,
+This demonstrates the high sensitivity of rotationally asymmetric objects,
 where the eigenvalues do not exhibit simple ratios.
 
 ___
