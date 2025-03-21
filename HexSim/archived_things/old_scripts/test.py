@@ -1,4 +1,4 @@
-from HexSim.scripts.form_matrix import Hexagonal_Prism
+from HexSim.scripts.old_scripts.form_matrix import Hexagonal_Prism
 from HexSim.scripts.evolve_rotation import Run_Rotation
 from HexSim.scripts.animate_hex import Animate_Hex
 import numpy as np

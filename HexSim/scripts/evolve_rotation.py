@@ -120,7 +120,61 @@ class Run_Rotation:
         if save == True and self.path != None and save != False:
             df.to_csv(self.out+'\\data.csv')
         return df
-    
+
+    def plot_w(self, save = False, total = False):
+            
+            plt.figure()
+
+            plt.rcParams['font.family'] = 'Corbel'
+            plt.rcParams['font.size'] = 12
+            plt.rcParams['axes.titlesize'] = 16
+            plt.rcParams['axes.labelsize'] = 14
+            plt.rcParams['legend.fontsize'] = 12
+            plt.rcParams['xtick.labelsize'] = 12
+            plt.rcParams['ytick.labelsize'] = 12
+            plt.rcParams['axes.grid'] = True  # Default grid for all plots
+            plt.rcParams['grid.alpha'] = 0.6  # Grid transparency
+            plt.rcParams['grid.linestyle'] = '--'
+            
+            plt.rcParams.update({
+                'font.family': 'DejaVu Sans',  # Use 'Helvetica' or 'Nimbus Sans L' if preferred
+                'font.size': 12,         # Adjust font size for labels and annotations
+                'axes.labelsize': 14,    # Axis labels
+                'axes.titlesize': 16,    # Title size
+                'legend.fontsize': 12,   # Legend
+                'xtick.labelsize': 12,   # X-axis tick labels
+                'ytick.labelsize': 12,   # Y-axis tick labels
+            })
+
+            title = 'Angular Velocity over '+str(round(self.df['Time'][self.df.index[-1]]))+' Seconds for $\omega_{0y}=$'+str(round(self.df['wy'][0], 4))
+            plt.title(title)
+            plt.ylabel('Angular Velocity')
+            plt.xlabel('Time (s)')
+            scale = 'linear'
+            plt.yscale(scale)
+            plt.scatter(self.df['Time'], self.df['wx'], s = 0.5, label = '$w_x$')
+            plt.scatter(self.df['Time'], self.df['wy'], s = 0.5, label = '$w_y$')
+            plt.scatter(self.df['Time'], self.df['wz'], s = 0.5, label = '$w_z$')
+            plt.legend()
+
+            length_string = str("{:.2e}".format(self.steps))+'.png'
+
+            if save == True and self.out != None:
+                plt.savefig(self.out + '\\len_' + length_string + '.png')
+                plt.show()
+            else:
+                plt.show()
+
+            if total == True:
+                plt.figure()
+                plt.title('Total Angular Velocity over '+str(round(self.df['Time'][self.df.index[-1]]))+' Seconds for $\omega_{0y}=$'+str(self.df['wy'][0]))
+                plt.scatter(self.df['Time'], self.df['L_mag'], s = 0.5)
+                if save == True and self.out != None:
+                    plt.savefig(self.out + '\\len_' + length_string + 'totalL.png')
+                    plt.show()
+                else:
+                    plt.show()
+
     def plot_L(self, save = False, total = False):
         
         plt.figure()
